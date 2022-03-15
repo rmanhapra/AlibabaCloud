@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JavaScript ES6 Template Literals</title>
+    <! -- The es6-promise file is required for Internet Explorer. -->
+    <script src="./resources/lib/es6-promise.min.js"></script>
+    <script src="./resources/lib/aliyun-oss-sdk-6.13.0.min.js"></script>
+    <script src="./resources/aliyun-upload-sdk-1.5.2.min.js"></script>
+    <script>
+        var uploader = new AliyunUpload.Vod({
+       // Required. The ID of your Alibaba Cloud account.
+       userId:"122",
+       // The size of each part in multipart upload. The default size is 1 MB. The size cannot be smaller than 100 KB.
+       partSize: 1048576,
+     // The maximum number of parts that can be uploaded in parallel. Default value: 5.
+       parallel: 5,
+     // The maximum number of attempts to retry the upload upon a network exception. Default value: 3.
+     retryCount: 3,
+     // The intervals at which the system retries the upload upon a network exception. Default value: 2. Unit: seconds.
+     retryDuration: 2,
+     // Specify whether to report the upload logs to ApsaraVideo VOD. Default value: true.
+     enableUploadProgress: true,
+      // This callback is fired when the upload starts.
+      'onUploadstarted': function (uploadInfo) {
+        console.log("onUploadStarted:" + uploadInfo.file.name + ", endpoint:" + uploadInfo.endpoint + ", bucket:" + uploadInfo.bucket + ", object:" + uploadInfo.object);
+    // Use upload mode 1. In this mode, you must call different operations to obtain the values of the uploadAuth and uploadAddress parameters, depending on whether the uploadInfo.videoId parameter has a value.
+    if (uploadInfo.videoId) {
+            // If the uploadInfo.videoId parameter has a value, call the RefreshUploadVideo operation.
+         }
+     else{
+            // If the uploadInfo.videoId parameter does not have a value, call the CreateUploadVideo operation.
+         uploader.setUploadAuthAndAddress(uploadInfo, "eyJTZWN1cml0eVRva2VuIjoiQ0FJU2xnVjFxNkZ0NUIyeWZTaklyNWZiQS9uZXY1NWt6L2FjY2hYWmczWWxZK1VZcXFILzFUejJJSHhMZm5KckErRWRzL3MybEdGUzdmZ1psckl1RnNVVUdCZWZOWlVvczh3TnExdjdKb0hidk5ldTBic0hoWnY5MStoNnE1aThqcUhvZU96Y1lJNzN3NXpQQWdtMk5VUVJySkwrY1RLOUpaZlBVL21nZ29KbWFkSTZSeFN4YVNFOGF2NWRPZ3BscnIzNFh4bTBNdTIyWUNiM25rM2FEa2RqcG1nYWpuaGt1NXk0MmRHNzRCalRoMEdZc3VnT3ZOYllPb0NwYWNWTE5wVnlXTXZYdXV0dGJmamgzU2RjekJKSStheHE3dFZENGl5VmtkeUJKRk5UN2g2YUZ1ZkkrNzhjS3hSaU5JazhHckpGcGVUeHNPQjhwdTNMbnA3cjlnNUpPdWhaTVYvWVg1dnk1ZGJBQk9LeFA4d2xTSzcvUEgzQnNMYUlMWUtuamhzZ1puc1hEQXBRWjdoYkxXUnJXeUUwVGpiVEpwZXU0a3poWlIreUtkdUN5N3BrK3AxdzExSGw0ZGV2T2x5VFFxMlF5em9sSXBzN1prOUtSeGtOeGo3SWVLZ2NieWxSZDA5bUg3K1BVYmhyYUJkWHBjR1l1aGJKQkFsaDFXMXlvdm5pWnV2Zm9Md2ljWUg0VjU1ZHMrOGFmNDhVbDJveFUyeitVYTYxOExSOUZncGZUSzFSemJQbU5MS205YmFCMjUvelcrUGREZTBkc1Znb1psTEVwaUdXRzNSTE5uK3p0Sjl4ZDF1VTlzUFkxN2ZCNzlSK0Z3ZHJ1TnNFVjEvYU50MXd0RUJoNXFhbzB3NmE5dlNrV0htbm9ETm5wZFBVcGRZUnRSRTVjSzZ1MDdiSjRHR083WEhCYmZnMXc1ZVFCR1prRzBXK0lTdzhtYStmaXlJTS8wME5tanJ4WTA1R3NCR1lpRC9zT2NjWDNybmJteWxPQytGV2diajZNMnI5cERROVVvblJ2ZTVXQWJrNEpMcDBQNnppalZFNTlKck90QWF0dm9ETml4QmhhdFB2ZXFFdUM0d3lXRTZzdXYrMk40Qk54TEE3WDI2a0l2QUhzUGQzd3hpR3dqSVYrT2tnZXRveUdrNUVQb0VoYktjcmRTMURDMWJaOWhxQUFSUlVZY1RMRmFOYWxrdHRvTGxIcnRwZFVjZ3Z3LzA0aVNBTmFCSzlrVktIY2hLbUkweHVlem91STczeTNrTUNiVm9YY1RJQkd5RFFtVEZsUElUQjI2TTFDUmdYREY2bWg0SGVKRUp3SEpuWjhrOTNPZUxqZk5xR054VU9SR1FaU08rZ1NENDZkNmFGSUpWcVVrYWtTV1liRkhjd0IwOHpaT2hkWXplUUhoUmciLCJBY2Nlc3NLZXlJZCI6IlNUUy5OVG5IQ2pSQUV4NHdwM2hndnBvajRFZFQ3IiwiRXhwaXJlVVRDVGltZSI6IjIwMjItMDItMTFUMTM6Mzc6MDhaIiwiQWNjZXNzS2V5U2VjcmV0IjoiSjU2OFJER3BocVpZVDk1RHJWdm9SdjViRDdhSk1wVmhUdTU5VHpOMVFIVWsiLCJFeHBpcmF0aW9uIjoiMzYwMCIsIlJlZ2lvbiI6ImFwLXNvdXRoLTEifQ",
+          "eyJFbmRwb2ludCI6Imh0dHBzOi8vb3NzLWFwLXNvdXRoLTEuYWxpeXVuY3MuY29tIiwiQnVja2V0IjoidmlkZW9hc3NldCIsIkZpbGVOYW1lIjoidm9kLTZjMzI2Ny9jdXN0b21lclRyYW5zL2JhZTYxNzdiZDI3NjQyNWYxYjgxMzY3ODllOWQ5ZDM4LzRjYzI5YTI4LTE3ZWU4YzA1ZGEzLTAwMTMtYTUxNC1iZGQtODUyYmEubXA0In0",
+         "71d8297f5a0b4c50bc6a824e42eecddf");
+         }
+      },
+      // This callback is fired when the upload succeeds.
+      'onUploadSucceed': function (uploadInfo) {
+        log("onUploadSucceed: " + uploadInfo.file.name + ", endpoint:" + uploadInfo.endpoint + ", bucket:" + uploadInfo.bucket + ", object:" + uploadInfo.object);
+      },
+      // This callback is fired when the upload fails.
+      'onUploadFailed': function (uploadInfo, code, message) {
+        log("onUploadFailed: file:" + uploadInfo.file.name + ",code:" + code + ", message:" + message);
+      },
+      // This callback is fired when the default or custom upload progress is reached. The progress is measured in bytes.
+      'onUploadProgress': function (uploadInfo, totalSize, loadedPercent) {
+          log("onUploadProgress:file:" + uploadInfo.file.name + ", fileSize:" + totalSize + ", percent:" + Math.ceil(loadedPercent * 100) + "%");
+      },
+      // This callback is fired when the upload credential expires.
+      'onUploadTokenExpired': function (uploadInfo) {
+          console.log("onUploadTokenExpired");
+      // During implementation, call the RefreshUploadVideo operation to obtain a new value of the uploadAuth parameter based on the uploadInfo.videoId parameter.
+      // Specify the new value of the uploadAuth parameter obtained from ApsaraVideo VOD in the SDK.
+
+      uploader.resumeUploadWithAuth(uploadAuth);
+      },
+    // This callback is fired when all files are uploaded.
+    'onUploadEnd':function(uploadInfo){
+           console.log("onUploadEnd: uploaded all the files");
+       }
+});
+
+
+    </script>
+</head>
+<body>
+<form action="">
+    <input type="file" name="file" id="files" multiple/>
+</form>
+<script>
+    document.getElementById("files").addEventListener('change', function (event) {
+            for(var i=0; i<event.target.files.length; i++) {
+                 console.log("file selected from html");
+                 uploader.addFile(event.target.files[i], null, null, null, null);
+                 uploader.startUpload();
+            }
+       });
+</script>
+</body>
+</html>
